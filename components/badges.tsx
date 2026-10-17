@@ -1,7 +1,5 @@
 "use client"
 
-import { Zap } from "lucide-react"
-
 import { Badge } from "@/components/ui/badge"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
 import { cn } from "@/lib/utils"
@@ -114,7 +112,6 @@ export function FastAwardBadge() {
           variant="outline"
           className="border-orange-200 bg-orange-50 text-orange-700 dark:border-orange-500/30 dark:bg-orange-500/10 dark:text-orange-300"
         >
-          <Zap className="fill-current" />
           Fast award
         </Badge>
       </TooltipTrigger>

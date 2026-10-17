@@ -1,5 +1,6 @@
 // Pure query functions over indexed rows. Everything is O(n) per request (one mask pass; facets reuse it).
 import { FSG_NAMES, fsgName } from "./fsc";
+import type { Semantic } from "./semantic";
 import { dayNumber, type Row } from "./store";
 import type {
   FacetOption,
@@ -77,6 +78,10 @@ export function matchReasons(row: Row, it: Interests): string[] {
   return out;
 }
 
+/** Interests score plus the optional semantic bonus (sem null = unchanged behavior). */
+const totalScore = (row: Row, it: Interests | null, sem: Semantic | null): number =>
+  (it ? scoreRow(row, it) : 0) + (sem ? sem.bonus(row) : 0);
+
 // ---- compiled filter ---------------------------------------------------------------------------
 interface Compiled {
   tokens: { t: string; digits: string | null }[];
@@ -84,18 +89,19 @@ interface Compiled {
   fsc: Set<string> | null;
   aside: Set<string> | null;
   interests: Interests | null;
+  sem: Semantic | null;
   f: RfqFilters;
 }
 
-function compile(f: RfqFilters): Compiled {
+function compile(f: RfqFilters, sem: Semantic | null = null): Compiled {
   const tokens = f.q
     .toLowerCase()
     .split(/\s+/)
     .filter(Boolean)
     .map((t) => {
-      const isNumeric = /^[\d-]+$/.test(t) && /\d/.test(t);
-      const digits = isNumeric ? t.replace(/-/g, "") : null;
-      return { t, digits: digits && digits !== t ? digits : null };
+      // Dash-insensitive: "5320-01-069" and "SPE4A7-27-Q-0052" also match their dashless forms (NSN digits, sol# as in DIBBS URLs).
+      const stripped = /\d/.test(t) ? t.replace(/-/g, "") : "";
+      return { t, digits: stripped && stripped !== t ? stripped : null };
     });
   return {
     tokens,
@@ -103,6 +109,7 @@ function compile(f: RfqFilters): Compiled {
     fsc: f.fsc.length ? new Set(f.fsc) : null,
     aside: f.setAside.length ? new Set<string>(f.setAside) : null,
     interests: f.matchesOnly ? buildInterests(f) : null,
+    sem: f.matchesOnly ? sem : null,
     f,
   };
 }
@@ -127,13 +134,13 @@ function failMask(row: Row, c: Compiled, ctx: Ctx): number {
     const q = rfq.quantity;
     if (q == null || (f.qtyMin != null && q < f.qtyMin) || (f.qtyMax != null && q > f.qtyMax)) m |= F_QTY;
   }
-  if (c.interests && scoreRow(row, c.interests) <= 0) m |= F_MATCH;
+  if ((c.interests || c.sem) && totalScore(row, c.interests, c.sem) <= 0) m |= F_MATCH;
   return m;
 }
 
 /** Rows passing every filter, optionally ignoring one facet's own selection (used for facet counts). */
-export function applyFilters(rows: Row[], f: RfqFilters, ctx: Ctx, opts: { skip?: FacetName } = {}): Row[] {
-  const c = compile(f);
+export function applyFilters(rows: Row[], f: RfqFilters, ctx: Ctx, opts: { skip?: FacetName; sem?: Semantic | null } = {}): Row[] {
+  const c = compile(f, opts.sem ?? null);
   const ignore = opts.skip ? SKIP_BITS[opts.skip] : 0;
   const out: Row[] = [];
   for (let i = 0; i < rows.length; i++) {
@@ -148,10 +155,10 @@ export interface Item {
   score: number;
 }
 
-export function scoreRows(rows: Row[], f: RfqFilters): { items: Item[]; interests: Interests | null } {
+export function scoreRows(rows: Row[], f: RfqFilters, sem: Semantic | null = null): { items: Item[]; interests: Interests | null } {
   const interests = buildInterests(f);
   const items: Item[] = new Array(rows.length);
-  for (let i = 0; i < rows.length; i++) items[i] = { row: rows[i], score: interests ? scoreRow(rows[i], interests) : 0 };
+  for (let i = 0; i < rows.length; i++) items[i] = { row: rows[i], score: totalScore(rows[i], interests, sem) };
   return { items, interests };
 }
 
@@ -180,12 +187,14 @@ export function sortRows(items: Item[], sort: SortKey): Item[] {
   }
 }
 
-export function toView(item: Item, ctx: Ctx, interests: Interests | null): RfqView {
+export function toView(item: Item, ctx: Ctx, interests: Interests | null, sem: Semantic | null = null): RfqView {
   const { rfq, retDay } = item.row;
   const view: RfqView = { ...rfq, fsgName: fsgName(rfq.fsg), daysLeft: retDay - ctx.todayDay };
-  if (interests) {
+  if (interests || sem) {
     view.score = item.score;
-    view.matchReasons = item.score > 0 ? matchReasons(item.row, interests) : [];
+    view.matchReasons = item.score > 0 ? (interests ? matchReasons(item.row, interests) : []) : [];
+    const similar = item.score > 0 && sem ? sem.reason(item.row) : null;
+    if (similar) view.matchReasons.push(similar);
   }
   return view;
 }
@@ -200,8 +209,8 @@ const CLOSING_BUCKETS: [string, string, number][] = [
 
 const byCountDesc = (a: FacetOption, b: FacetOption) => b.count - a.count || a.key.localeCompare(b.key);
 
-export function buildFacets(rows: Row[], f: RfqFilters, ctx: Ctx): FacetsResponse {
-  const c = compile(f);
+export function buildFacets(rows: Row[], f: RfqFilters, ctx: Ctx, sem: Semantic | null = null): FacetsResponse {
+  const c = compile(f, sem);
   const asideCounts = new Map<string, number>();
   const fsgCounts = new Map<string, number>();
   const issuedCounts = new Map<string, number>();

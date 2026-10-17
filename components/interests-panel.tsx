@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState, type KeyboardEvent } from "react";
-import { Check, Plus, Sparkles, X } from "lucide-react";
+import { Check, X } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Command, CommandEmpty, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
@@ -59,15 +59,13 @@ export function InterestsPanel({ open, onOpenChange, interests, onChange }: Inte
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent side="right" className="w-full gap-0 p-0 sm:max-w-md">
         <SheetHeader className="border-b p-4 pr-12">
-          <SheetTitle className="flex items-center gap-2 text-base">
-            <Sparkles className="size-4" aria-hidden /> My interests
-          </SheetTitle>
-          <SheetDescription>Tell us what you can supply - we rank RFQs by fit.</SheetDescription>
+          <SheetTitle className="text-base">Pin interests (optional)</SheetTitle>
+          <SheetDescription>We already learn from your activity. Pin categories or keywords here to always boost them.</SheetDescription>
         </SheetHeader>
 
         <div className="flex-1 space-y-5 overflow-y-auto p-4">
           <section className="space-y-2">
-            <h3 className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">Start from a profile</h3>
+            <h3 className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">Quick picks</h3>
             <div className="flex flex-wrap gap-2">
               {STARTER_PROFILES.map((p) => {
                 const active = p.fsg.every((g) => interests.fsg.includes(g));
@@ -156,7 +154,7 @@ export function InterestsPanel({ open, onOpenChange, interests, onChange }: Inte
                 }}
               />
               <Button variant="outline" onClick={addFsc} disabled={fscText.length === 0}>
-                <Plus aria-hidden /> Add
+                Add
               </Button>
             </div>
             {fscError && <p className="text-xs text-destructive">A class code is exactly 4 digits.</p>}

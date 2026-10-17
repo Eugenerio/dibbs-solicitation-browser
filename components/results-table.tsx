@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { AlertTriangle, Check, ExternalLink, FileText, SearchX, Star } from "lucide-react"
+import { ExternalLink } from "lucide-react"
 
 import { ClosesBadge, FastAwardBadge, MatchChips, SetAsideBadge, formatShortDate } from "@/components/badges"
 import { Button, buttonVariants } from "@/components/ui/button"
@@ -81,13 +81,7 @@ function NsnButton({
         onCopy(rfq)
       }}
     >
-      {copied ? (
-        <>
-          <Check /> Copied
-        </>
-      ) : (
-        rfq.nsnDisplay
-      )}
+      {copied ? "Copied" : rfq.nsnDisplay}
     </Button>
   )
 }
@@ -96,7 +90,9 @@ function TechDocsFlag() {
   return (
     <Tooltip>
       <TooltipTrigger render={<span className="inline-flex text-muted-foreground" tabIndex={0} />}>
-        <FileText className="size-4" aria-label="Technical documents available" />
+        <span className="rounded-md border px-1.5 py-0.5 text-xs leading-none font-medium" aria-label="Technical documents available">
+          Docs
+        </span>
       </TooltipTrigger>
       <TooltipContent>Technical documents attached (drawings / specs)</TooltipContent>
     </Tooltip>
@@ -115,8 +111,8 @@ function RowActions({
   return (
     <div className="flex items-center justify-end gap-0.5" onClick={(e) => e.stopPropagation()}>
       <Button
-        variant="ghost"
-        size="icon-sm"
+        variant={saved ? "secondary" : "ghost"}
+        size="xs"
         aria-label={saved ? "Remove from saved" : "Save RFQ"}
         aria-pressed={saved}
         title={saved ? "Saved (s)" : "Save (s)"}
@@ -125,7 +121,7 @@ function RowActions({
           onToggleSave(rfq)
         }}
       >
-        <Star className={cn(saved && "fill-amber-400 text-amber-500")} />
+        {saved ? "Saved" : "Save"}
       </Button>
       <a
         href={rfq.packageUrl}
@@ -166,7 +162,9 @@ export function ResultsTable({
   sort,
   onSortChange,
   hasInterests,
+  onClearFilters,
 }: {
+  onClearFilters?: () => void
   items: RfqView[]
   loading: boolean
   refetching: boolean
@@ -262,7 +260,6 @@ export function ResultsTable({
   if (error) {
     body = (
       <div className="flex flex-col items-center gap-3 rounded-lg border border-dashed px-6 py-16 text-center">
-        <AlertTriangle className="size-8 text-destructive" />
         <div>
           <p className="font-medium">Couldn&apos;t load RFQs</p>
           <p className="mt-1 text-sm text-muted-foreground">{error}</p>
@@ -282,8 +279,8 @@ export function ResultsTable({
               <Skeleton className="h-4 w-2/3" />
               <Skeleton className="h-3 w-1/3" />
             </div>
-            <Skeleton className="hidden h-4 w-28 md:block" />
-            <Skeleton className="hidden h-5 w-20 rounded-full md:block" />
+            <Skeleton className="hidden h-4 w-28 xl:block" />
+            <Skeleton className="hidden h-5 w-20 rounded-full xl:block" />
             <Skeleton className="h-5 w-14 rounded-full" />
           </div>
         ))}
@@ -292,11 +289,15 @@ export function ResultsTable({
   } else if (items.length === 0) {
     body = (
       <div className="flex flex-col items-center gap-2 rounded-lg border border-dashed px-6 py-16 text-center">
-        <SearchX className="size-8 text-muted-foreground" />
         <p className="font-medium">No RFQs match these filters</p>
         <p className="max-w-sm text-sm text-muted-foreground">
           Try removing a filter, widening the closing window, or including closed RFQs.
         </p>
+        {onClearFilters && (
+          <Button variant="outline" size="sm" className="mt-2" onClick={onClearFilters}>
+            Clear all filters
+          </Button>
+        )}
       </div>
     )
   } else {
@@ -305,7 +306,7 @@ export function ResultsTable({
         {/* md+: real table */}
         <div
           className={cn(
-            "hidden rounded-lg border md:block [&_[data-slot=table-container]]:overflow-visible",
+            "hidden rounded-lg border xl:block [&_[data-slot=table-container]]:overflow-visible",
           )}
         >
           <Table>
@@ -314,13 +315,13 @@ export function ResultsTable({
                 {[
                   ["NSN", ""],
                   ["Item", ""],
-                  ["Solicitation #", "hidden xl:table-cell"],
+                  ["Solicitation #", "hidden min-[1400px]:table-cell"],
                   ["Qty", "text-right"],
                   ["Set-aside", ""],
                   ["Flags", ""],
                   ["Issued", "hidden lg:table-cell"],
                   ["Closes", ""],
-                  ["", "w-[84px]"],
+                  ["", "w-[100px]"],
                 ].map(([label, cls], i) => (
                   <TableHead
                     key={i}
@@ -351,7 +352,7 @@ export function ResultsTable({
                   <TableCell className="min-w-52 max-w-96 py-2 whitespace-normal">
                     <ItemCell rfq={r} />
                   </TableCell>
-                  <TableCell className="hidden py-2 font-mono text-xs text-muted-foreground xl:table-cell">
+                  <TableCell className="hidden py-2 font-mono text-xs text-muted-foreground min-[1400px]:table-cell">
                     {r.solNumber}
                   </TableCell>
                   <TableCell className="py-2 text-right tabular-nums">{qtyFmt(r.quantity)}</TableCell>
@@ -380,7 +381,7 @@ export function ResultsTable({
         </div>
 
         {/* <md: stacked cards */}
-        <ul className="flex flex-col gap-2 md:hidden">
+        <ul className="flex flex-col gap-2 xl:hidden">
           {items.map((r) => (
             <li
               key={r.solNumber}

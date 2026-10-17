@@ -1,7 +1,5 @@
 "use client"
 
-import { ChevronLeft, ChevronRight } from "lucide-react"
-
 import { Button } from "@/components/ui/button"
 
 function pageList(page: number, pages: number): (number | "gap-l" | "gap-r")[] {
@@ -52,8 +50,7 @@ export function PaginationBar({
             onClick={() => onPage(page - 1)}
             aria-label="Previous page"
           >
-            <ChevronLeft data-icon="inline-start" />
-            Prev
+            Previous
           </Button>
           <div className="hidden items-center gap-1 sm:flex">
             {pageList(page, pages).map((p) =>
@@ -87,7 +84,6 @@ export function PaginationBar({
             aria-label="Next page"
           >
             Next
-            <ChevronRight data-icon="inline-end" />
           </Button>
         </div>
       )}

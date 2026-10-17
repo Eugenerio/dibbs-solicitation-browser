@@ -25,9 +25,10 @@ DIBBS --(consent POST, per-issue-date listing, ASP.NET postback paging, node:htt
 - `lib/rfq/types.ts` is the contract (Rfq, RfqView, RfqFilters, responses). `lib/rfq/params.ts` is the single URL<->filters codec.
 - Filters: search (NSN with/without dashes, solicitation #, item, PR), closing-soon buckets, set-aside, supply group (FSG category
   from the NSN prefix), fast-award candidates, has-tech-docs, quantity range, issue date, include-closed.
-- "My interests" (the recommendation feature): vendor picks supply groups / FSC codes / keywords (stored in localStorage, sent with
-  each request); the server scores each RFQ (+3 per 4-digit FSC prefix, +2 per 2-digit FSG, +2 per keyword hit in the item name,
-  +1 fast-award tie-break), returns `score` and human-readable `matchReasons`; UI has For you / All / Saved tabs and "Best match" sort.
+- Recommendation ("For you"): NO manual setup. The client learns a sparse interest vector (FSG/FSC codes + item-name keywords) from
+  searches, supply-group filters, opened RFQs and saves (14-day decay, localStorage, lib/ui/learned-interests.ts), compiles the top terms
+  into ifsc/ikw request params; the server scores each RFQ (+3 per 4-digit FSC prefix, +2 per 2-digit FSG, +2 per keyword hit in the item
+  name, +1 fast-award tie-break) and returns `score` + `matchReasons`. Manual "Pin interests" is optional. Optional embeddings layer: see below.
 - Scraper facts worth knowing: DIBBS is behind an F5 WAF that rejects Node's built-in fetch (undici) headers -> we use node:https with
   browser-like Accept/Accept-Language. A DoD consent banner is accepted programmatically (form POST), like a browser click.
   Listing pages are 50 rows; paging is an ASP.NET `__doPostBack('Page$N')` chain using echoed hidden fields. 3 days scraped in parallel.
@@ -44,3 +45,8 @@ DIBBS --(consent POST, per-issue-date listing, ASP.NET postback paging, node:htt
   "what would you do with 2 more hours"; scraping legality/ethics questions; system-design phase that follows (design ingestion at scale,
   freshness, search, per-user personalization, alerts).
 - Keep answers short and spoken-language friendly; Yevhenii will say them aloud in an interview.
+
+## Semantic ranking (optional)
+- Item names are embedded offline (OpenAI `text-embedding-3-small`, 256 dims) into `data/embeddings.json`; `npm run embed` and every ingest embed only NEW names (incremental), and a missing key just skips it.
+- Opened (w=1) and saved (w=3) RFQs are sent as `sem=` anchors; their weighted centroid is the vendor's taste vector, every row gets a cosine bonus (up to +6) in the match score and a "Similar to: ..." reason. No key or network at query time.
+- No embeddings file or no anchors = zero behavior change; the trade-off is a committed ~5 MB vector file and cold-start (needs a few opens/saves).

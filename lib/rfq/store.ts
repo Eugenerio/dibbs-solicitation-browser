@@ -41,7 +41,7 @@ function index(snapshot: Snapshot): Loaded {
     rows[i] = {
       rfq: r,
       nomLower,
-      hay: `${r.nsnDisplay} ${r.nsn} ${r.solNumber} ${r.nomenclature} ${r.prNumber}`.toLowerCase(),
+      hay: `${r.nsnDisplay} ${r.nsn} ${r.solNumber} ${r.solNumber.replace(/-/g, "")} ${r.nomenclature} ${r.prNumber}`.toLowerCase(),
       retDay: dayNumber(r.returnByDate),
     };
   }

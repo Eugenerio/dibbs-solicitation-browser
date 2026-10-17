@@ -1,7 +1,6 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { SlidersHorizontal, Sparkles, Star } from "lucide-react";
 import { ActiveFilters } from "@/components/active-filters";
 import { DetailDrawer } from "@/components/detail-drawer";
 import { FilterSidebar } from "@/components/filter-sidebar";
@@ -16,8 +15,20 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { defaultFilters, parseFilters, toSearchParams } from "@/lib/rfq/params";
 import type { RfqFilters, RfqView, SortKey } from "@/lib/rfq/types";
 import { activeFilterCount, daysUntil, fmtInt, todayIsoUtc } from "@/lib/ui/format";
-import { emptyInterests, interestCount, KEYS, readInterests, readJson, STARTER_PROFILES, writeJson, type Interests } from "@/lib/ui/storage";
+import { emptyInterests, interestCount, KEYS, readInterests, readJson, writeJson, type Interests } from "@/lib/ui/storage";
 import { useRfqs } from "@/lib/ui/use-rfqs";
+import {
+  getProfile,
+  getTop,
+  LEARNED_MIN_STRENGTH,
+  recordFilterFsg,
+  recordOpen,
+  recordSave,
+  recordSearch,
+  recordUnsave,
+  useLearnedProfile,
+} from "@/lib/ui/learned-interests";
+import { addAnchor, removeAnchor } from "@/lib/ui/anchors";
 
 type Tab = "foryou" | "all" | "saved";
 
@@ -52,7 +63,7 @@ export default function Page() {
     const sp = new URLSearchParams(window.location.search);
     const parsed = parseFilters(sp);
     const ints = readInterests();
-    const has = interestCount(ints) > 0;
+    const has = interestCount(ints) > 0 || getTop(getProfile()).strength >= LEARNED_MIN_STRENGTH;
     const tabParam = sp.get("tab");
     let t: Tab = "all";
     let sort = parsed.sort;
@@ -73,6 +84,28 @@ export default function Page() {
 
   const hasInterests = interestCount(interests) > 0;
 
+  // Learned (implicit) interests: top-K of the behavior vector, applied only once we've seen enough activity.
+  // Keys are sorted strings so re-ordering inside the top-K doesn't refetch; only membership changes do.
+  const learnedProfile = useLearnedProfile();
+  const learned = useMemo(() => getTop(learnedProfile), [learnedProfile]);
+  const learnedActive = learned.strength >= LEARNED_MIN_STRENGTH;
+  const learnedIfscKey = learnedActive ? [...learned.ifsc].sort().join(",") : "";
+  const learnedIkwKey = learnedActive ? [...learned.ikw].sort().join(",") : "";
+  const hasProfile = hasInterests || learnedActive;
+
+  // Search counts as interest once the user stops typing (once per distinct query).
+  const lastSearchRef = useRef("");
+  useEffect(() => {
+    if (!ready) return;
+    const q = filters.q.trim().toLowerCase();
+    if (q.length < 3 || q === lastSearchRef.current) return;
+    const t = setTimeout(() => {
+      lastSearchRef.current = q;
+      recordSearch(q);
+    }, 900);
+    return () => clearTimeout(t);
+  }, [ready, filters.q]);
+
   // Persist.
   useEffect(() => {
     if (ready) writeJson(KEYS.interests, interests);
@@ -86,16 +119,18 @@ export default function Page() {
     if (!ready) return;
     const sp = toSearchParams({ ...filters, matchesOnly: tab === "foryou" });
     if (tab === "saved") sp.set("tab", "saved");
-    else if (tab === "all" && hasInterests) sp.set("tab", "all");
+    else if (tab === "all" && hasProfile) sp.set("tab", "all");
     const qs = sp.toString();
     window.history.replaceState(null, "", window.location.pathname + (qs ? `?${qs}` : ""));
-  }, [ready, filters, tab, hasInterests]);
+  }, [ready, filters, tab, hasProfile]);
 
-  // What actually goes to the API: UI filters + interests + the tab's matchesOnly.
-  const requestFilters = useMemo<RfqFilters>(
-    () => ({ ...filters, matchesOnly: tab === "foryou", intFsc: [...interests.fsg, ...interests.fsc], intKw: interests.kw }),
-    [filters, tab, interests],
-  );
+  // What actually goes to the API: UI filters + (pinned ∪ learned) interests + the tab's matchesOnly.
+  const requestFilters = useMemo<RfqFilters>(() => {
+    const split = (k: string) => (k ? k.split(",") : []);
+    const intFsc = [...new Set([...interests.fsg, ...interests.fsc, ...split(learnedIfscKey)])];
+    const intKw = [...new Set([...interests.kw, ...split(learnedIkwKey)])];
+    return { ...filters, matchesOnly: tab === "foryou" && intFsc.length + intKw.length > 0, intFsc, intKw };
+  }, [filters, tab, interests, learnedIfscKey, learnedIkwKey]);
   const { list, facets, meta, counts, error, loading, refetching, retry, reload } = useRfqs(requestFilters, {
     enabled: ready,
     listEnabled: tab !== "saved",
@@ -132,8 +167,23 @@ export default function Page() {
   );
 
   const savedIds = useMemo(() => new Set(saved.map((s) => s.solNumber)), [saved]);
-  const toggleSave = useCallback((r: RfqView) => {
-    setSaved((prev) => (prev.some((s) => s.solNumber === r.solNumber) ? prev.filter((s) => s.solNumber !== r.solNumber) : [r, ...prev]));
+  const toggleSave = useCallback(
+    (r: RfqView) => {
+      if (saved.some((s) => s.solNumber === r.solNumber)) {
+        recordUnsave(r);
+        removeAnchor(r.solNumber);
+      } else {
+        recordSave(r);
+        addAnchor(r.solNumber, 3);
+      }
+      setSaved((prev) => (prev.some((s) => s.solNumber === r.solNumber) ? prev.filter((s) => s.solNumber !== r.solNumber) : [r, ...prev]));
+    },
+    [saved],
+  );
+  const openRow = useCallback((r: RfqView) => {
+    setSelected(r);
+    recordOpen(r);
+    addAnchor(r.solNumber, 1);
   }, []);
 
   const todayIso = meta?.today ?? clientToday;
@@ -165,8 +215,20 @@ export default function Page() {
     </>
   );
 
-  const sidebarProps = { filters, facets, onChange: patch, onClear: clearFilters };
-  const showForYouOnboarding = tab === "foryou" && !hasInterests;
+  // Newly checked supply groups are a strong interest signal.
+  const onSidebarChange = useCallback(
+    (p: Partial<RfqFilters>) => {
+      for (const code of p.fsg ?? []) {
+        if (filters.fsg.includes(code)) continue;
+        const label = facets?.fsg.find((o) => o.key === code)?.label;
+        recordFilterFsg(code, label?.replace(/^\d{2}\s*[·-]?\s*/, ""));
+      }
+      patch(p);
+    },
+    [filters.fsg, facets, patch],
+  );
+  const sidebarProps = { filters, facets, onChange: onSidebarChange, onClear: clearFilters };
+  const showForYouHint = tab === "foryou" && !hasProfile;
 
   return (
     <div className="flex min-h-screen flex-1 flex-col bg-muted/40">
@@ -182,7 +244,7 @@ export default function Page() {
 
       <div className="mx-auto flex w-full max-w-[1600px] flex-1 items-start gap-6 px-4 py-4">
         {tab !== "saved" && (
-          <aside className="sticky top-[76px] hidden max-h-[calc(100vh-92px)] w-[280px] shrink-0 overflow-y-auto rounded-xl border bg-card p-4 md:block">
+          <aside className="sticky top-[76px] hidden max-h-[calc(100vh-92px)] w-[280px] shrink-0 overflow-y-auto rounded-xl border bg-card p-4 xl:block">
             <FilterSidebar {...sidebarProps} />
           </aside>
         )}
@@ -190,47 +252,46 @@ export default function Page() {
         <main className="min-w-0 flex-1 space-y-3">
           <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
             <Tabs value={tab} onValueChange={(v) => changeTab(v as Tab)}>
-              <TabsList className="h-9">
-                <TabsTrigger value="foryou" className="gap-1.5 px-3">
-                  <Sparkles className="size-3.5" aria-hidden />
-                  {tabLabel("For you", hasInterests ? counts.foryou : null)}
+              <TabsList className="h-9 max-w-full">
+                <TabsTrigger value="foryou" className="gap-1 px-2 sm:gap-1.5 sm:px-3">
+                  {tabLabel("For you", hasProfile ? counts.foryou : null)}
                 </TabsTrigger>
-                <TabsTrigger value="all" className="gap-1.5 px-3">
+                <TabsTrigger value="all" className="gap-1 px-2 sm:gap-1.5 sm:px-3">
                   {tabLabel("All RFQs", counts.all ?? (tab === "all" ? list?.total ?? null : null))}
                 </TabsTrigger>
-                <TabsTrigger value="saved" className="gap-1.5 px-3">
-                  <Star className="size-3.5" aria-hidden />
+                <TabsTrigger value="saved" className="gap-1 px-2 sm:gap-1.5 sm:px-3">
                   {tabLabel("Saved", saved.length)}
                 </TabsTrigger>
               </TabsList>
             </Tabs>
 
             {tab !== "saved" && (
-              <Button variant="outline" className="md:hidden" onClick={() => setFiltersOpen(true)}>
-                <SlidersHorizontal aria-hidden /> Filters
+              <Button variant="outline" className="xl:hidden" onClick={() => setFiltersOpen(true)}>
+                Filters
                 {activeCount > 0 && (
                   <Badge className="h-4 min-w-4 px-1 text-[0.7rem]">{activeCount}</Badge>
                 )}
               </Button>
             )}
 
-            {tab !== "saved" && !showForYouOnboarding && list && (
+            {tab !== "saved" && list && (
               <p className="ml-auto text-sm text-muted-foreground" aria-live="polite">
                 <span className="font-medium text-foreground tabular-nums">{fmtInt(total)}</span> {total === 1 ? "RFQ" : "RFQs"}
               </p>
             )}
           </div>
 
-          {tab !== "saved" && !showForYouOnboarding && <ActiveFilters filters={filters} onChange={patch} onClear={clearFilters} />}
+          {showForYouHint && (
+            <p className="text-sm text-muted-foreground">Search, open or save a few RFQs and results will start ranking by fit.</p>
+          )}
 
-          {showForYouOnboarding ? (
-            <Onboarding onPick={(fsg) => changeInterests({ ...interests, fsg })} onCustomize={() => setInterestsOpen(true)} />
-          ) : tab === "saved" ? (
+          {tab !== "saved" && <ActiveFilters filters={filters} onChange={patch} onClear={clearFilters} />}
+
+          {tab === "saved" ? (
             saved.length === 0 ? (
               <EmptyCard
-                icon={<Star className="size-5" aria-hidden />}
                 title="Nothing saved yet"
-                body="Star an RFQ in the list or the detail view to keep it here, even after it drops off the daily feed."
+                body="Save an RFQ in the list or the detail view to keep it here, even after it drops off the daily feed."
               />
             ) : (
               <ResultsTable
@@ -241,10 +302,10 @@ export default function Page() {
                 onRetry={() => {}}
                 savedIds={savedIds}
                 onToggleSave={toggleSave}
-                onOpen={setSelected}
+                onOpen={openRow}
                 sort={filters.sort}
                 onSortChange={onSortChange}
-                hasInterests={hasInterests}
+                hasInterests={hasProfile}
               />
             )
           ) : (
@@ -255,12 +316,13 @@ export default function Page() {
                 refetching={refetching}
                 error={error}
                 onRetry={retry}
+                onClearFilters={activeCount > 0 ? clearFilters : undefined}
                 savedIds={savedIds}
                 onToggleSave={toggleSave}
-                onOpen={setSelected}
+                onOpen={openRow}
                 sort={filters.sort}
                 onSortChange={onSortChange}
-                hasInterests={hasInterests}
+                hasInterests={hasProfile}
               />
               {list && list.total > 0 && (
                 <PaginationBar page={list.page} pages={list.pages} total={list.total} pageSize={list.pageSize} onPage={onPage} />
@@ -292,30 +354,12 @@ export default function Page() {
   );
 }
 
-function EmptyCard({ icon, title, body, children }: { icon: React.ReactNode; title: string; body: string; children?: React.ReactNode }) {
+function EmptyCard({ title, body, children }: { title: string; body: string; children?: React.ReactNode }) {
   return (
     <div className="grid place-items-center rounded-xl border border-dashed bg-card px-6 py-14 text-center">
-      <div className="mb-3 grid size-10 place-items-center rounded-full bg-muted text-muted-foreground">{icon}</div>
       <h2 className="text-base font-semibold">{title}</h2>
       <p className="mt-1 max-w-md text-sm text-muted-foreground">{body}</p>
       {children && <div className="mt-5 flex flex-wrap items-center justify-center gap-2">{children}</div>}
     </div>
-  );
-}
-
-function Onboarding({ onPick, onCustomize }: { onPick(fsg: string[]): void; onCustomize(): void }) {
-  return (
-    <EmptyCard
-      icon={<Sparkles className="size-5" aria-hidden />}
-      title="Tell us what you can supply"
-      body="We rank every RFQ by fit with your product categories and keywords, so the ones worth quoting rise to the top. Pick a starting point or build your own."
-    >
-      {STARTER_PROFILES.map((p) => (
-        <Button key={p.id} variant="outline" onClick={() => onPick(p.fsg)}>
-          {p.label}
-        </Button>
-      ))}
-      <Button onClick={onCustomize}>Customize…</Button>
-    </EmptyCard>
   );
 }

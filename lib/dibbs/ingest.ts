@@ -96,5 +96,11 @@ export async function ingest(opts: { days?: number; onProgress?: Progress } = {}
     rfqs,
   });
   progress(dates.length, dates.length, `Done: ${fetched.length} fetched, ${added} new`);
+  try {
+    // incremental: only new item names are embedded; no key / API error never fails the ingest
+    await (await import("../rfq/embed")).embedMissing({ onProgress: opts.onProgress });
+  } catch (e) {
+    console.warn("embedding skipped:", e);
+  }
   return { added, total: rfqs.length };
 }

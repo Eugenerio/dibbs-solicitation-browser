@@ -162,7 +162,7 @@ export function FilterSidebar({ filters, facets, onChange, onClear, hideHeading 
         {!facets ? (
           <SkeletonRows n={6} />
         ) : fsgOptions.length === 0 ? (
-          <p className="text-xs text-muted-foreground">No categories match.</p>
+          <p className="text-xs text-muted-foreground">{catQuery.trim() ? "No categories match." : "None in the current view."}</p>
         ) : (
           <ScrollArea className="rounded-lg border [&_[data-slot=scroll-area-viewport]]:max-h-56">
             <div className="space-y-0.5 p-1.5">
@@ -222,7 +222,7 @@ export function FilterSidebar({ filters, facets, onChange, onClear, hideHeading 
         {!facets ? (
           <SkeletonRows n={2} />
         ) : issuedOptions.length === 0 ? (
-          <p className="text-xs text-muted-foreground">No dates available.</p>
+          <p className="text-xs text-muted-foreground">None in the current view.</p>
         ) : (
           <ToggleGroup
             variant="outline"

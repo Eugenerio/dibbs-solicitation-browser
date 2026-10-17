@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { Check, Copy, ExternalLink, FileText, Info, Star, Zap } from "lucide-react"
+import { ExternalLink } from "lucide-react"
 
 import { ClosesBadge, FastAwardBadge, MatchChips, SetAsideBadge, formatLongDate } from "@/components/badges"
 import { useCopy } from "@/components/results-table"
@@ -105,11 +105,8 @@ export function DetailDrawer({
                 <Field label="Set-aside">{r.setAsideLabel}</Field>
                 <Field label="Fast award">
                   {r.fastAward ? (
-                    <span className="flex items-start gap-1.5">
-                      <Zap className="mt-0.5 size-3.5 shrink-0 fill-orange-500 text-orange-500" />
-                      <span>
-                        Candidate. Micro-purchase quotes may be awarded before the return date, so quote early.
-                      </span>
+                    <span>
+                      Candidate. Micro-purchase quotes may be awarded before the return date, so quote early.
                     </span>
                   ) : (
                     <span className="text-muted-foreground">No</span>
@@ -117,10 +114,7 @@ export function DetailDrawer({
                 </Field>
                 <Field label="Technical docs">
                   {r.hasTechDocs ? (
-                    <span className="flex items-center gap-1.5">
-                      <FileText className="size-3.5 text-muted-foreground" />
-                      {r.techDocs || "Available"}
-                    </span>
+                    <span>{r.techDocs || "Available"}</span>
                   ) : (
                     <span className="text-muted-foreground">{r.techDocs || "None"}</span>
                   )}
@@ -143,7 +137,6 @@ export function DetailDrawer({
               <div className="grid grid-cols-2 gap-2">
                 {r.rfqPdfUrl && (
                   <a href={r.rfqPdfUrl} target="_blank" rel="noopener noreferrer" className={linkBtn("outline")}>
-                    <FileText data-icon="inline-start" />
                     Solicitation PDF
                   </a>
                 )}
@@ -170,7 +163,6 @@ export function DetailDrawer({
                   size="lg"
                   onClick={() => copy(r.solNumber, r.nsnDisplay)}
                 >
-                  {copied === r.solNumber ? <Check data-icon="inline-start" /> : <Copy data-icon="inline-start" />}
                   {copied === r.solNumber ? "Copied" : "Copy NSN"}
                 </Button>
                 <Button
@@ -179,20 +171,13 @@ export function DetailDrawer({
                   aria-pressed={saved}
                   onClick={() => onToggleSave(r)}
                 >
-                  <Star
-                    data-icon="inline-start"
-                    className={cn(saved && "fill-amber-400 text-amber-500")}
-                  />
                   {saved ? "Saved" : "Save"}
                 </Button>
               </div>
               <Separator />
-              <p className="flex items-start gap-1.5 text-xs text-muted-foreground">
-                <Info className="mt-0.5 size-3 shrink-0" />
-                <span>
-                  DIBBS shows a DoD consent banner on your first visit. Accept it once to reach the RFQ. Submitting a
-                  quote requires a DIBBS login.
-                </span>
+              <p className="text-xs text-muted-foreground">
+                DIBBS shows a DoD consent banner on your first visit. Accept it once to reach the RFQ. Submitting a
+                quote requires a DIBBS login.
               </p>
             </SheetFooter>
           </TooltipProvider>

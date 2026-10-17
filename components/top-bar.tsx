@@ -1,11 +1,12 @@
 "use client";
 
 import { useEffect, useState, type RefObject } from "react";
-import { Crosshair, Loader2, RefreshCw, Search, Sparkles, X } from "lucide-react";
+import { Search, X } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupInput } from "@/components/ui/input-group";
 import { Kbd } from "@/components/ui/kbd";
+import { LearnedProfileButton } from "@/components/learned-profile";
 import { fmtInt, timeAgo } from "@/lib/ui/format";
 import { useRefresh } from "@/lib/ui/use-rfqs";
 import type { MetaResponse } from "@/lib/rfq/types";
@@ -48,19 +49,16 @@ export function TopBar({ q, onQChange, meta, interestCount, onOpenInterests, onR
   }, [searchRef]);
 
   return (
-    <header className="sticky top-0 z-40 border-b bg-background/90 backdrop-blur supports-[backdrop-filter]:bg-background/75">
-      <div className="mx-auto flex w-full max-w-[1600px] flex-wrap items-center gap-x-4 gap-y-2 px-4 py-2.5 md:flex-nowrap">
+    <header className="z-40 border-b lg:sticky lg:top-0 bg-background/90 backdrop-blur supports-[backdrop-filter]:bg-background/75">
+      <div className="mx-auto flex w-full max-w-[1600px] flex-wrap items-center gap-x-4 gap-y-2 px-4 py-2.5 lg:flex-nowrap">
         <div className="flex min-w-0 items-center gap-2.5">
-          <div className="grid size-9 shrink-0 place-items-center rounded-lg bg-primary text-primary-foreground">
-            <Crosshair className="size-5" aria-hidden />
-          </div>
           <div className="min-w-0 leading-tight">
             <h1 className="truncate text-[0.95rem] font-semibold tracking-tight">Solicitation Browser</h1>
             <p className="truncate text-xs text-muted-foreground">DLA RFQ opportunities</p>
           </div>
         </div>
 
-        <div className="order-last w-full md:order-none md:mx-auto md:max-w-xl md:flex-1">
+        <div className="order-last w-full lg:order-none lg:mx-auto lg:max-w-xl lg:flex-1">
           <InputGroup className="h-9">
             <InputGroupAddon>
               <Search />
@@ -109,12 +107,21 @@ export function TopBar({ q, onQChange, meta, interestCount, onOpenInterests, onR
             )}
           </div>
           <Button variant="outline" onClick={() => void refresh.start()} disabled={refresh.running} title="Re-scrape the latest RFQs from DIBBS">
-            {refresh.running ? <Loader2 className="animate-spin" aria-hidden /> : <RefreshCw aria-hidden />}
-            <span className="hidden max-w-44 truncate sm:inline">{refresh.running ? (refresh.message ?? "Refreshing") : "Refresh from DIBBS"}</span>
+            <span className="max-w-44 truncate">
+              {refresh.running ? (
+                (refresh.message ?? "Refreshing…")
+              ) : (
+                <>
+                  <span className="sm:hidden">Refresh</span>
+                  <span className="hidden sm:inline">Refresh from DIBBS</span>
+                </>
+              )}
+            </span>
           </Button>
-          <Button onClick={onOpenInterests}>
-            <Sparkles aria-hidden />
-            <span className="hidden sm:inline">My interests</span>
+          <LearnedProfileButton />
+          <Button variant="ghost" onClick={onOpenInterests}>
+            <span className="sm:hidden">Interests</span>
+            <span className="hidden sm:inline">Pin interests (optional)</span>
             {interestCount > 0 && (
               <Badge variant="secondary" className="h-4 min-w-4 px-1 text-[0.7rem]">
                 {interestCount}

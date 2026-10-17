@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { toSearchParams } from "@/lib/rfq/params";
+import { getAnchorParam } from "@/lib/ui/anchors";
 import type { FacetsResponse, ListResponse, MetaResponse, RefreshStatus, RfqFilters } from "@/lib/rfq/types";
 
 async function getJson<T>(url: string, signal?: AbortSignal): Promise<T> {
@@ -47,9 +48,14 @@ export function useRfqs(filters: RfqFilters, { enabled, listEnabled }: UseRfqsOp
   const eff = useMemo<RfqFilters>(() => ({ ...filters, q: dq }), [filters, dq]);
 
   const hasInterests = eff.intFsc.length + eff.intKw.length > 0;
-  const listKey = toSearchParams(eff).toString();
-  const facetsKey = toSearchParams({ ...eff, page: 1, sort: "closing", pageSize: 50 }).toString();
-  const countKey = (matches: boolean) => toSearchParams({ ...eff, page: 1, pageSize: 1, sort: "closing", matchesOnly: matches }).toString();
+  const baseKey = toSearchParams(eff).toString();
+  // semantic anchors are re-read only when filters change, so opening a drawer does not reshuffle the list behind it
+  const sem = useMemo(() => (enabled ? getAnchorParam() : ""), [enabled, baseKey]); // eslint-disable-line react-hooks/exhaustive-deps
+  const semQ = sem ? `&sem=${encodeURIComponent(sem)}` : "";
+  const listKey = baseKey + semQ;
+  const facetsKey = toSearchParams({ ...eff, page: 1, sort: "closing", pageSize: 50 }).toString() + semQ;
+  const countKey = (matches: boolean) =>
+    toSearchParams({ ...eff, page: 1, pageSize: 1, sort: "closing", matchesOnly: matches }).toString() + (matches ? semQ : "");
   const allKey = countKey(false);
   const foryouKey = hasInterests ? countKey(true) : null;
 
@@ -173,7 +179,7 @@ export function useRefresh(onDone: () => void) {
   const start = useCallback(async () => {
     setState({ running: true, message: "Starting", error: null });
     try {
-      const res = await fetch("/api/refresh", { method: "POST", headers: { "content-type": "application/json" }, body: "{}" });
+      const res = await fetch("/api/refresh", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ days: 2 }) }); // incremental: only the newest issue days (full backfill is a CLI job)
       if (!res.ok) throw new Error(`Refresh failed (${res.status})`);
       void poll();
     } catch (e) {
