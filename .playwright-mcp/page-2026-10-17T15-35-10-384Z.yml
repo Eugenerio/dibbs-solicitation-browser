@@ -1,0 +1,180 @@
+- generic [ref=f7e1]:
+  - generic [ref=f7e2]:
+    - banner [ref=f7e3]:
+      - generic [ref=f7e4]:
+        - generic [ref=f7e9]:
+          - heading "Solicitation Browser" [level=1] [ref=f7e10]
+          - paragraph [ref=f7e11]: DLA RFQ opportunities
+        - group [ref=f7e13]:
+          - group [ref=f7e14]
+          - searchbox "Search RFQs" [active] [ref=f7e18]: hydrogen
+          - group [ref=f7e19]:
+            - button "Clear search" [ref=f7e1405]
+        - generic [ref=f7e20]:
+          - generic [ref=f7e100]: 51 open RFQsupdated 4 min ago
+          - button "Refresh from DIBBS" [ref=f7e101]
+          - button "My interests" [ref=f7e103]
+    - generic [ref=f7e23]:
+      - complementary [ref=f7e105]:
+        - generic [ref=f7e106]:
+          - generic [ref=f7e107]:
+            - heading "Filters" [level=2] [ref=f7e108]
+            - button "Clear all (1)" [ref=f7e1406]
+          - generic [ref=f7e109]:
+            - generic [ref=f7e110]:
+              - heading "Closing soon" [level=3] [ref=f7e111]
+              - paragraph [ref=f7e112]: Quote deadline (return-by date)
+            - group "Closing soon" [ref=f7e113]:
+              - button "Today 0" [ref=f7e114]:
+                - text: Today
+                - generic [ref=f7e115]: "0"
+              - button "≤ 3 days 0" [ref=f7e116]:
+                - text: ≤ 3 days
+                - generic [ref=f7e117]: "0"
+              - button "≤ 7 days 1" [ref=f7e1407]:
+                - text: ≤ 7 days
+                - generic [ref=f7e119]: "1"
+              - button "≤ 14 days 1" [ref=f7e1408]:
+                - text: ≤ 14 days
+                - generic [ref=f7e121]: "1"
+          - separator [ref=f7e122]
+          - generic [ref=f7e123]:
+            - generic [ref=f7e124]:
+              - heading "Set-aside" [level=3] [ref=f7e125]
+              - paragraph [ref=f7e126]: Who is allowed to bid
+            - generic [ref=f7e128] [cursor=pointer]:
+              - checkbox "Unrestricted 1" [ref=f7e1409]
+              - checkbox [aria-hidden] [ref=f7e130]
+              - generic [ref=f7e131]: Unrestricted
+              - generic [ref=f7e132]: "1"
+          - separator [ref=f7e138]
+          - generic [ref=f7e139]:
+            - generic [ref=f7e140]:
+              - heading "Category" [level=3] [ref=f7e141]
+              - paragraph [ref=f7e142]: Federal supply group (first 2 digits of the NSN)
+            - textbox "Filter categories" [ref=f7e143]:
+              - /placeholder: Filter categories…
+            - generic "65 · Medical, Dental & Vet Equipment & Supplies" [ref=f7e146] [cursor=pointer]:
+              - checkbox "65 Medical, Dental & Vet Equipment & Supplies 1" [ref=f7e1410]
+              - checkbox [aria-hidden] [ref=f7e148]
+              - generic [ref=f7e149]:
+                - text: "65"
+                - generic [ref=f7e150]: Medical, Dental & Vet Equipment & Supplies
+              - generic [ref=f7e151]: "1"
+          - separator [ref=f7e214]
+          - generic [ref=f7e215]:
+            - heading "Quick filters" [level=3] [ref=f7e217]
+            - generic [ref=f7e218]:
+              - generic [ref=f7e219] [cursor=pointer]:
+                - generic [ref=f7e220]:
+                  - text: Fast award candidates
+                  - generic [ref=f7e221]: May be awarded before the deadline
+                - generic [ref=f7e222]:
+                  - generic [ref=f7e223]: "1"
+                  - switch "Fast award candidates May be awarded before the deadline 1" [ref=f7e1411]
+                  - checkbox [aria-hidden] [ref=f7e225]
+              - generic [ref=f7e226] [cursor=pointer]:
+                - generic [ref=f7e227]: Has technical docs
+                - generic [ref=f7e228]:
+                  - generic [ref=f7e229]: "0"
+                  - switch "Has technical docs 0" [ref=f7e1412]
+                  - checkbox [aria-hidden] [ref=f7e231]
+              - generic [ref=f7e232] [cursor=pointer]:
+                - generic [ref=f7e233]: Show closed
+                - switch "Show closed" [ref=f7e234]
+                - checkbox [aria-hidden] [ref=f7e235]
+          - separator [ref=f7e236]
+          - generic [ref=f7e237]:
+            - generic [ref=f7e238]:
+              - heading "Issued" [level=3] [ref=f7e239]
+              - paragraph [ref=f7e240]: Day the RFQ was posted
+            - group "Issued date" [ref=f7e241]:
+              - button "Oct 16 1" [ref=f7e1413]:
+                - text: Oct 16
+                - generic [ref=f7e245]: "1"
+          - separator [ref=f7e246]
+          - generic [ref=f7e247]:
+            - generic [ref=f7e248]:
+              - heading "Quantity" [level=3] [ref=f7e249]
+              - paragraph [ref=f7e250]: "Range in view: 1 to 1"
+            - generic [ref=f7e251]:
+              - spinbutton "Minimum quantity" [ref=f7e252]
+              - generic [aria-hidden] [ref=f7e253]: –
+              - spinbutton "Maximum quantity" [ref=f7e254]
+      - main [ref=f7e24]:
+        - generic [ref=f7e25]:
+          - tablist [ref=f7e27]:
+            - tab "For you" [ref=f7e28]
+            - tab "All RFQs 1" [selected] [ref=f7e1414]:
+              - text: All RFQs
+              - generic [ref=f7e256]: "1"
+            - tab "Saved 0" [ref=f7e30]:
+              - text: Saved
+              - generic [ref=f7e31]: "0"
+          - paragraph [ref=f7e257]: 1 RFQ
+        - generic "Active filters" [ref=f7e1415]:
+          - generic [ref=f7e1416]:
+            - generic [ref=f7e1417]: "Search: “hydrogen”"
+            - 'button "Remove filter: Search: “hydrogen”" [ref=f7e1418]'
+        - region "RFQ results" [ref=f7e33]:
+          - generic [ref=f7e34]:
+            - generic [ref=f7e35]:
+              - generic [ref=f7e36]: Sort by
+              - combobox "Sort results" [ref=f7e37]:
+                - generic [ref=f7e38]: Closing soonest
+                - img [aria-hidden]: ▼
+              - textbox [aria-hidden] [ref=f7e39]: closing
+            - generic [ref=f7e258]:
+              - generic [ref=f7e259]:
+                - generic: j
+                - generic: k
+                - text: move
+              - generic [ref=f7e260]:
+                - generic: Enter
+                - text: details
+              - generic [ref=f7e261]:
+                - generic: o
+                - text: DIBBS
+              - generic [ref=f7e262]:
+                - generic: s
+                - text: save
+          - table [ref=f7e265]:
+            - rowgroup [ref=f7e266]:
+              - row [ref=f7e267]:
+                - columnheader "NSN" [ref=f7e268]
+                - columnheader "Item" [ref=f7e269]
+                - 'columnheader "Solicitation #" [ref=f7e270]'
+                - columnheader "Qty" [ref=f7e271]
+                - columnheader "Set-aside" [ref=f7e272]
+                - columnheader "Flags" [ref=f7e273]
+                - columnheader "Issued" [ref=f7e274]
+                - columnheader "Closes" [ref=f7e275]
+                - columnheader "Actions" [ref=f7e276]
+            - rowgroup [ref=f7e278]:
+              - row [ref=f7e368] [cursor=pointer]:
+                - cell [ref=f7e369]:
+                  - button "6505-00-153-8480" [ref=f7e370]
+                - cell "HYDROGEN PEROXIDE T Medical, Dental & Vet Equipment & Supplies" [ref=f7e371]:
+                  - generic [ref=f7e372]:
+                    - generic [ref=f7e373]: HYDROGEN PEROXIDE T
+                    - generic [ref=f7e374]: Medical, Dental & Vet Equipment & Supplies
+                - cell "SPE2DP-27-T-0118" [ref=f7e375]
+                - cell "1" [ref=f7e376]
+                - cell "Unrestricted" [ref=f7e377]:
+                  - generic "Unrestricted/Not Set Aside" [ref=f7e378]: Unrestricted
+                - cell "Fast award" [ref=f7e380]
+                - cell "Oct 16" [ref=f7e384]
+                - cell "in 4d" [ref=f7e385]:
+                  - generic "Return by Oct 21, 2026" [ref=f7e386]: in 4d
+                - cell [ref=f7e387]:
+                  - generic [ref=f7e388]:
+                    - button "Save RFQ" [ref=f7e389]
+                    - link "Open SPE2DP-27-T-0118 on DIBBS" [ref=f7e390]:
+                      - /url: https://www.dibbs.bsm.dla.mil/rfq/rfqrec.aspx?sn=SPE2DP27T0118
+        - navigation "Pagination" [ref=f7e1397]:
+          - paragraph [ref=f7e1398]:
+            - text: Showing
+            - generic [ref=f7e1399]: 1-1
+            - text: of 1
+  - button "Open Next.js Dev Tools" [ref=f7e95] [cursor=pointer]
+  - alert [ref=f7e99]

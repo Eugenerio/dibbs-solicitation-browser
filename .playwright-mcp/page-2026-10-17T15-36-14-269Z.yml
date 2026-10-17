@@ -1,0 +1,105 @@
+- generic [active] [ref=f8e1]:
+  - generic [ref=f8e2]:
+    - banner [ref=f8e3]:
+      - generic [ref=f8e4]:
+        - generic [ref=f8e9]:
+          - heading "Solicitation Browser" [level=1] [ref=f8e10]
+          - paragraph [ref=f8e11]: DLA RFQ opportunities
+        - group [ref=f8e13]:
+          - group [ref=f8e14]
+          - searchbox "Search RFQs" [ref=f8e18]
+          - group [ref=f8e19]:
+            - generic: /
+        - generic [ref=f8e20]:
+          - generic [ref=f8e21]: Loading…
+          - button "Refresh from DIBBS" [ref=f8e22]
+          - button "My interests" [ref=f8e24]
+    - generic [ref=f8e26]:
+      - complementary [ref=f8e27]:
+        - generic [ref=f8e28]:
+          - generic [ref=f8e29]:
+            - heading "Filters" [level=2] [ref=f8e30]
+            - button "Clear all" [disabled]
+          - generic [ref=f8e31]:
+            - generic [ref=f8e32]:
+              - heading "Closing soon" [level=3] [ref=f8e33]
+              - paragraph [ref=f8e34]: Quote deadline (return-by date)
+            - group "Closing soon" [ref=f8e35]:
+              - button "Today" [ref=f8e36]
+              - button "≤ 3 days" [ref=f8e37]
+              - button "≤ 7 days" [ref=f8e38]
+              - button "≤ 14 days" [ref=f8e39]
+          - separator [ref=f8e40]
+          - generic [ref=f8e42]:
+            - heading "Set-aside" [level=3] [ref=f8e43]
+            - paragraph [ref=f8e44]: Who is allowed to bid
+          - separator [ref=f8e50]
+          - generic [ref=f8e51]:
+            - generic [ref=f8e52]:
+              - heading "Category" [level=3] [ref=f8e53]
+              - paragraph [ref=f8e54]: Federal supply group (first 2 digits of the NSN)
+            - textbox "Filter categories" [ref=f8e55]:
+              - /placeholder: Filter categories…
+          - separator [ref=f8e63]
+          - generic [ref=f8e64]:
+            - heading "Quick filters" [level=3] [ref=f8e66]
+            - generic [ref=f8e67]:
+              - generic [ref=f8e68] [cursor=pointer]:
+                - generic [ref=f8e69]:
+                  - text: Fast award candidates
+                  - generic [ref=f8e70]: May be awarded before the deadline
+                - generic [ref=f8e71]:
+                  - switch [ref=f8e72]
+                  - checkbox [aria-hidden] [ref=f8e73]
+              - generic [ref=f8e74] [cursor=pointer]:
+                - generic [ref=f8e75]: Has technical docs
+                - generic [ref=f8e76]:
+                  - switch [ref=f8e77]
+                  - checkbox [aria-hidden] [ref=f8e78]
+              - generic [ref=f8e79] [cursor=pointer]:
+                - generic [ref=f8e80]: Show closed
+                - switch [ref=f8e81]
+                - checkbox [aria-hidden] [ref=f8e82]
+          - separator [ref=f8e83]
+          - generic [ref=f8e85]:
+            - heading "Issued" [level=3] [ref=f8e86]
+            - paragraph [ref=f8e87]: Day the RFQ was posted
+          - separator [ref=f8e91]
+          - generic [ref=f8e92]:
+            - heading "Quantity" [level=3] [ref=f8e94]
+            - generic [ref=f8e95]:
+              - spinbutton "Minimum quantity" [ref=f8e96]
+              - generic [aria-hidden] [ref=f8e97]: –
+              - spinbutton "Maximum quantity" [ref=f8e98]
+      - main [ref=f8e99]:
+        - tablist [ref=f8e102]:
+          - tab "For you" [ref=f8e103]
+          - tab "All RFQs" [selected] [ref=f8e104]
+          - tab "Saved 0" [ref=f8e105]:
+            - text: Saved
+            - generic [ref=f8e106]: "0"
+        - region "RFQ results" [ref=f8e107]:
+          - generic [ref=f8e108]:
+            - generic [ref=f8e109]:
+              - generic [ref=f8e110]: Sort by
+              - combobox "Sort results" [ref=f8e111]:
+                - generic [ref=f8e112]: Closing soonest
+                - img [aria-hidden]: ▼
+              - textbox [aria-hidden] [ref=f8e113]: closing
+            - generic [ref=f8e114]:
+              - generic [ref=f8e115]:
+                - generic: j
+                - generic: k
+                - text: move
+              - generic [ref=f8e116]:
+                - generic: Enter
+                - text: details
+              - generic [ref=f8e117]:
+                - generic: o
+                - text: DIBBS
+              - generic [ref=f8e118]:
+                - generic: s
+                - text: save
+          - generic "Loading RFQs" [ref=f8e120]
+  - button "Open Next.js Dev Tools" [ref=f8e190] [cursor=pointer]
+  - alert [ref=f8e194]

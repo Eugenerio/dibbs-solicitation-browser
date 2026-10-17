@@ -1,0 +1,132 @@
+- generic [ref=f7e1]:
+  - generic [ref=f7e2]:
+    - banner [ref=f7e3]:
+      - generic [ref=f7e4]:
+        - generic [ref=f7e9]:
+          - heading "Solicitation Browser" [level=1] [ref=f7e1773]
+          - paragraph [ref=f7e11]: DLA RFQ opportunities
+        - group [ref=f7e13]:
+          - group [ref=f7e14]
+          - searchbox "Search RFQs" [ref=f7e1774]
+          - group [ref=f7e19]:
+            - generic: /
+        - generic [ref=f7e20]:
+          - generic [ref=f7e100]: 51 open RFQsupdated 5 min ago
+          - button "Refresh from DIBBS" [ref=f7e1776]
+          - button "My interests 4" [ref=f7e1777]:
+            - generic [ref=f7e104]: My interests
+            - generic [ref=f7e1761]: "4"
+    - generic [ref=f7e23]:
+      - complementary [ref=f7e105]:
+        - generic [ref=f7e106]:
+          - generic [ref=f7e107]:
+            - heading "Filters" [level=2] [ref=f7e1778]
+            - button "Clear all (1)" [ref=f7e1779]
+          - generic [ref=f7e109]:
+            - generic [ref=f7e110]:
+              - heading "Closing soon" [level=3] [ref=f7e1780]
+              - paragraph [ref=f7e112]: Quote deadline (return-by date)
+            - group "Closing soon" [ref=f7e1781]:
+              - button "Today 0" [ref=f7e1782]:
+                - text: Today
+                - generic [ref=f7e115]: "0"
+              - button "≤ 3 days 0" [ref=f7e1783]:
+                - text: ≤ 3 days
+                - generic [ref=f7e117]: "0"
+              - button "≤ 7 days 0" [ref=f7e1784]:
+                - text: ≤ 7 days
+                - generic [ref=f7e119]: "0"
+              - button "≤ 14 days 0" [ref=f7e2224]:
+                - text: ≤ 14 days
+                - generic [ref=f7e121]: "0"
+          - separator [ref=f7e122]
+          - generic [ref=f7e124]:
+            - heading "Set-aside" [level=3] [ref=f7e1786]
+            - paragraph [ref=f7e126]: Who is allowed to bid
+          - separator [ref=f7e138]
+          - generic [ref=f7e139]:
+            - generic [ref=f7e140]:
+              - heading "Category" [level=3] [ref=f7e1787]
+              - paragraph [ref=f7e142]: Federal supply group (first 2 digits of the NSN)
+            - textbox "Filter categories" [ref=f7e1788]:
+              - /placeholder: Filter categories…
+            - paragraph [ref=f7e2225]: No categories match.
+          - separator [ref=f7e214]
+          - generic [ref=f7e215]:
+            - heading "Quick filters" [level=3] [ref=f7e1789]
+            - generic [ref=f7e218]:
+              - generic [ref=f7e219] [cursor=pointer]:
+                - generic [ref=f7e220]:
+                  - text: Fast award candidates
+                  - generic [ref=f7e221]: May be awarded before the deadline
+                - generic [ref=f7e222]:
+                  - generic [ref=f7e223]: "0"
+                  - switch "Fast award candidates May be awarded before the deadline 0" [checked] [active] [ref=f7e1790]
+                  - checkbox [checked] [aria-hidden] [ref=f7e225]
+              - generic [ref=f7e226] [cursor=pointer]:
+                - generic [ref=f7e227]: Has technical docs
+                - generic [ref=f7e228]:
+                  - generic [ref=f7e229]: "0"
+                  - switch "Has technical docs 0" [ref=f7e2226]
+                  - checkbox [aria-hidden] [ref=f7e231]
+              - generic [ref=f7e232] [cursor=pointer]:
+                - generic [ref=f7e233]: Show closed
+                - switch "Show closed" [ref=f7e1792]
+                - checkbox [aria-hidden] [ref=f7e235]
+          - separator [ref=f7e236]
+          - generic [ref=f7e237]:
+            - generic [ref=f7e238]:
+              - heading "Issued" [level=3] [ref=f7e1793]
+              - paragraph [ref=f7e240]: Day the RFQ was posted
+            - paragraph [ref=f7e2227]: No dates available.
+          - separator [ref=f7e246]
+          - generic [ref=f7e247]:
+            - heading "Quantity" [level=3] [ref=f7e1794]
+            - generic [ref=f7e251]:
+              - spinbutton "Minimum quantity" [ref=f7e1795]
+              - generic [aria-hidden] [ref=f7e253]: –
+              - spinbutton "Maximum quantity" [ref=f7e1796]
+      - main [ref=f7e24]:
+        - generic [ref=f7e25]:
+          - tablist [ref=f7e27]:
+            - tab "For you 0" [selected] [ref=f7e2228]:
+              - text: For you
+              - generic [ref=f7e1764]: "0"
+            - tab "All RFQs 26" [ref=f7e2229]:
+              - text: All RFQs
+              - generic [ref=f7e256]: "26"
+            - tab "Saved 0" [ref=f7e1799]:
+              - text: Saved
+              - generic [ref=f7e31]: "0"
+          - paragraph [ref=f7e257]: 0 RFQs
+        - generic "Active filters" [ref=f7e2230]:
+          - generic [ref=f7e2231]:
+            - generic [ref=f7e2232]: Fast award
+            - 'button "Remove filter: Fast award" [ref=f7e2233]'
+        - region "RFQ results" [ref=f7e1802]:
+          - generic [ref=f7e34]:
+            - generic [ref=f7e35]:
+              - generic [ref=f7e36]: Sort by
+              - combobox "Sort results" [ref=f7e1803]:
+                - generic [ref=f7e38]: Best match
+                - img [aria-hidden]: ▼
+              - textbox [aria-hidden] [ref=f7e39]: match
+            - generic [ref=f7e258]:
+              - generic [ref=f7e259]:
+                - generic: j
+                - generic: k
+                - text: move
+              - generic [ref=f7e260]:
+                - generic: Enter
+                - text: details
+              - generic [ref=f7e261]:
+                - generic: o
+                - text: DIBBS
+              - generic [ref=f7e262]:
+                - generic: s
+                - text: save
+          - generic [ref=f7e263]:
+            - paragraph [ref=f7e2239]: No RFQs match these filters
+            - paragraph [ref=f7e2240]: Try removing a filter, widening the closing window, or including closed RFQs.
+  - button "Open Next.js Dev Tools" [ref=f7e95] [cursor=pointer]
+  - alert [ref=f7e99]

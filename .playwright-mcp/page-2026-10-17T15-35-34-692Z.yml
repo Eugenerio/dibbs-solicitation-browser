@@ -1,0 +1,514 @@
+- generic [active] [ref=f7e1]:
+  - generic [ref=f7e2]:
+    - banner [ref=f7e3]:
+      - generic [ref=f7e4]:
+        - generic [ref=f7e9]:
+          - heading "Solicitation Browser" [level=1] [ref=f7e1773]
+          - paragraph [ref=f7e11]: DLA RFQ opportunities
+        - group [ref=f7e13]:
+          - group [ref=f7e14]
+          - searchbox "Search RFQs" [ref=f7e1774]
+          - group [ref=f7e19]:
+            - generic: /
+        - generic [ref=f7e20]:
+          - generic [ref=f7e100]: 51 open RFQsupdated 5 min ago
+          - button "Refresh from DIBBS" [ref=f7e1776]
+          - button "My interests 4" [ref=f7e1777]:
+            - generic [ref=f7e104]: My interests
+            - generic [ref=f7e1761]: "4"
+    - generic [ref=f7e23]:
+      - complementary [ref=f7e105]:
+        - generic [ref=f7e106]:
+          - generic [ref=f7e107]:
+            - heading "Filters" [level=2] [ref=f7e1778]
+            - button "Clear all" [disabled]
+          - generic [ref=f7e109]:
+            - generic [ref=f7e110]:
+              - heading "Closing soon" [level=3] [ref=f7e1780]
+              - paragraph [ref=f7e112]: Quote deadline (return-by date)
+            - group "Closing soon" [ref=f7e1781]:
+              - button "Today 0" [ref=f7e1782]:
+                - text: Today
+                - generic [ref=f7e115]: "0"
+              - button "≤ 3 days 0" [ref=f7e1783]:
+                - text: ≤ 3 days
+                - generic [ref=f7e117]: "0"
+              - button "≤ 7 days 0" [ref=f7e1784]:
+                - text: ≤ 7 days
+                - generic [ref=f7e119]: "0"
+              - button "≤ 14 days 16" [ref=f7e2241]:
+                - text: ≤ 14 days
+                - generic [ref=f7e121]: "16"
+          - separator [ref=f7e122]
+          - generic [ref=f7e123]:
+            - generic [ref=f7e124]:
+              - heading "Set-aside" [level=3] [ref=f7e1786]
+              - paragraph [ref=f7e126]: Who is allowed to bid
+            - generic [ref=f7e127]:
+              - generic [ref=f7e2242] [cursor=pointer]:
+                - checkbox "Unrestricted 14" [ref=f7e2243]
+                - checkbox [aria-hidden] [ref=f7e2244]
+                - generic [ref=f7e2245]: Unrestricted
+                - generic [ref=f7e2246]: "14"
+              - generic [ref=f7e2247] [cursor=pointer]:
+                - checkbox "Small Business 2" [ref=f7e2248]
+                - checkbox [aria-hidden] [ref=f7e2249]
+                - generic [ref=f7e2250]: Small Business
+                - generic [ref=f7e2251]: "2"
+          - separator [ref=f7e138]
+          - generic [ref=f7e139]:
+            - generic [ref=f7e140]:
+              - heading "Category" [level=3] [ref=f7e1787]
+              - paragraph [ref=f7e142]: Federal supply group (first 2 digits of the NSN)
+            - textbox "Filter categories" [ref=f7e1788]:
+              - /placeholder: Filter categories…
+            - generic [ref=f7e145]:
+              - generic "59 · Electrical & Electronic Equipment Components" [ref=f7e2252] [cursor=pointer]:
+                - checkbox "59 Electrical & Electronic Equipment Components 8" [ref=f7e2253]
+                - checkbox [aria-hidden] [ref=f7e2254]
+                - generic [ref=f7e2255]:
+                  - text: "59"
+                  - generic [ref=f7e2256]: Electrical & Electronic Equipment Components
+                - generic [ref=f7e2257]: "8"
+              - generic "61 · Electric Wire & Power Distribution" [ref=f7e2258] [cursor=pointer]:
+                - checkbox "61 Electric Wire & Power Distribution 8" [ref=f7e2259]
+                - checkbox [aria-hidden] [ref=f7e2260]
+                - generic [ref=f7e2261]:
+                  - text: "61"
+                  - generic [ref=f7e2262]: Electric Wire & Power Distribution
+                - generic [ref=f7e2263]: "8"
+          - separator [ref=f7e214]
+          - generic [ref=f7e215]:
+            - heading "Quick filters" [level=3] [ref=f7e1789]
+            - generic [ref=f7e218]:
+              - generic [ref=f7e219] [cursor=pointer]:
+                - generic [ref=f7e220]:
+                  - text: Fast award candidates
+                  - generic [ref=f7e221]: May be awarded before the deadline
+                - generic [ref=f7e222]:
+                  - generic [ref=f7e223]: "0"
+                  - switch "Fast award candidates May be awarded before the deadline 0" [ref=f7e1790]
+                  - checkbox [aria-hidden] [ref=f7e225]
+              - generic [ref=f7e226] [cursor=pointer]:
+                - generic [ref=f7e227]: Has technical docs
+                - generic [ref=f7e228]:
+                  - generic [ref=f7e229]: "4"
+                  - switch "Has technical docs 4" [ref=f7e2264]
+                  - checkbox [aria-hidden] [ref=f7e231]
+              - generic [ref=f7e232] [cursor=pointer]:
+                - generic [ref=f7e233]: Show closed
+                - switch "Show closed" [ref=f7e1792]
+                - checkbox [aria-hidden] [ref=f7e235]
+          - separator [ref=f7e236]
+          - generic [ref=f7e237]:
+            - generic [ref=f7e238]:
+              - heading "Issued" [level=3] [ref=f7e1793]
+              - paragraph [ref=f7e240]: Day the RFQ was posted
+            - group "Issued date" [ref=f7e2265]:
+              - button "Oct 17 16" [ref=f7e2266]:
+                - text: Oct 17
+                - generic [ref=f7e2267]: "16"
+          - separator [ref=f7e246]
+          - generic [ref=f7e247]:
+            - generic [ref=f7e248]:
+              - heading "Quantity" [level=3] [ref=f7e1794]
+              - paragraph [ref=f7e2268]: "Range in view: 1 to 152"
+            - generic [ref=f7e251]:
+              - spinbutton "Minimum quantity" [ref=f7e1795]
+              - generic [aria-hidden] [ref=f7e253]: –
+              - spinbutton "Maximum quantity" [ref=f7e1796]
+      - main [ref=f7e24]:
+        - generic [ref=f7e25]:
+          - tablist [ref=f7e27]:
+            - tab "For you 16" [selected] [ref=f7e2269]:
+              - text: For you
+              - generic [ref=f7e1764]: "16"
+            - tab "All RFQs 51" [ref=f7e2270]:
+              - text: All RFQs
+              - generic [ref=f7e256]: "51"
+            - tab "Saved 0" [ref=f7e1799]:
+              - text: Saved
+              - generic [ref=f7e31]: "0"
+          - paragraph [ref=f7e257]: 16 RFQs
+        - region "RFQ results" [ref=f7e1802]:
+          - generic [ref=f7e34]:
+            - generic [ref=f7e35]:
+              - generic [ref=f7e36]: Sort by
+              - combobox "Sort results" [ref=f7e1803]:
+                - generic [ref=f7e38]: Best match
+                - img [aria-hidden]: ▼
+              - textbox [aria-hidden] [ref=f7e39]: match
+            - generic [ref=f7e258]:
+              - generic [ref=f7e259]:
+                - generic: j
+                - generic: k
+                - text: move
+              - generic [ref=f7e260]:
+                - generic: Enter
+                - text: details
+              - generic [ref=f7e261]:
+                - generic: o
+                - text: DIBBS
+              - generic [ref=f7e262]:
+                - generic: s
+                - text: save
+          - table [ref=f7e2272]:
+            - rowgroup [ref=f7e2273]:
+              - row [ref=f7e2274]:
+                - columnheader "NSN" [ref=f7e2275]
+                - columnheader "Item" [ref=f7e2276]
+                - 'columnheader "Solicitation #" [ref=f7e2277]'
+                - columnheader "Qty" [ref=f7e2278]
+                - columnheader "Set-aside" [ref=f7e2279]
+                - columnheader "Flags" [ref=f7e2280]
+                - columnheader "Issued" [ref=f7e2281]
+                - columnheader "Closes" [ref=f7e2282]
+                - columnheader "Actions" [ref=f7e2283]
+            - rowgroup [ref=f7e2285]:
+              - row [ref=f7e2286] [cursor=pointer]:
+                - cell [ref=f7e2287]:
+                  - button "6140-01-457-6156" [ref=f7e2288]
+                - cell "BATTERY, STORAGE Electric Wire & Power Distribution Category 61" [ref=f7e2289]:
+                  - generic [ref=f7e2290]:
+                    - generic [ref=f7e2291]: BATTERY, STORAGE
+                    - generic [ref=f7e2292]: Electric Wire & Power Distribution
+                    - generic [ref=f7e2293]: Category 61
+                - cell "SPE7L7-27-Q-0098" [ref=f7e2295]
+                - cell "1" [ref=f7e2296]
+                - cell "Unrestricted" [ref=f7e2297]:
+                  - generic "Unrestricted/Not Set Aside" [ref=f7e2298]: Unrestricted
+                - cell [ref=f7e2300]
+                - cell "Oct 17" [ref=f7e2301]
+                - cell "in 10d" [ref=f7e2302]:
+                  - generic "Return by Oct 27, 2026" [ref=f7e2303]: in 10d
+                - cell [ref=f7e2304]:
+                  - generic [ref=f7e2305]:
+                    - button "Save RFQ" [ref=f7e2306]
+                    - link "Open SPE7L7-27-Q-0098 on DIBBS" [ref=f7e2307]:
+                      - /url: https://www.dibbs.bsm.dla.mil/rfq/rfqrec.aspx?sn=SPE7L727Q0098
+              - row [ref=f7e2308] [cursor=pointer]:
+                - cell [ref=f7e2309]:
+                  - button "6140-01-584-0411" [ref=f7e2310]
+                - cell "BATTERY, STORAGE Electric Wire & Power Distribution Category 61" [ref=f7e2311]:
+                  - generic [ref=f7e2312]:
+                    - generic [ref=f7e2313]: BATTERY, STORAGE
+                    - generic [ref=f7e2314]: Electric Wire & Power Distribution
+                    - generic [ref=f7e2315]: Category 61
+                - cell "SPE7L7-27-Q-0099" [ref=f7e2317]
+                - cell "1" [ref=f7e2318]
+                - cell "Unrestricted" [ref=f7e2319]:
+                  - generic "Unrestricted/Not Set Aside" [ref=f7e2320]: Unrestricted
+                - cell [ref=f7e2322]
+                - cell "Oct 17" [ref=f7e2323]
+                - cell "in 10d" [ref=f7e2324]:
+                  - generic "Return by Oct 27, 2026" [ref=f7e2325]: in 10d
+                - cell [ref=f7e2326]:
+                  - generic [ref=f7e2327]:
+                    - button "Save RFQ" [ref=f7e2328]
+                    - link "Open SPE7L7-27-Q-0099 on DIBBS" [ref=f7e2329]:
+                      - /url: https://www.dibbs.bsm.dla.mil/rfq/rfqrec.aspx?sn=SPE7L727Q0099
+              - row [ref=f7e2330] [cursor=pointer]:
+                - cell [ref=f7e2331]:
+                  - button "6140-01-584-0411" [ref=f7e2332]
+                - cell "BATTERY, STORAGE Electric Wire & Power Distribution Category 61" [ref=f7e2333]:
+                  - generic [ref=f7e2334]:
+                    - generic [ref=f7e2335]: BATTERY, STORAGE
+                    - generic [ref=f7e2336]: Electric Wire & Power Distribution
+                    - generic [ref=f7e2337]: Category 61
+                - cell "SPE7L7-27-Q-0100" [ref=f7e2339]
+                - cell "4" [ref=f7e2340]
+                - cell "Unrestricted" [ref=f7e2341]:
+                  - generic "Unrestricted/Not Set Aside" [ref=f7e2342]: Unrestricted
+                - cell [ref=f7e2344]
+                - cell "Oct 17" [ref=f7e2345]
+                - cell "in 10d" [ref=f7e2346]:
+                  - generic "Return by Oct 27, 2026" [ref=f7e2347]: in 10d
+                - cell [ref=f7e2348]:
+                  - generic [ref=f7e2349]:
+                    - button "Save RFQ" [ref=f7e2350]
+                    - link "Open SPE7L7-27-Q-0100 on DIBBS" [ref=f7e2351]:
+                      - /url: https://www.dibbs.bsm.dla.mil/rfq/rfqrec.aspx?sn=SPE7L727Q0100
+              - row [ref=f7e2352] [cursor=pointer]:
+                - cell [ref=f7e2353]:
+                  - button "6140-01-362-5737" [ref=f7e2354]
+                - cell "BATTERY, STORAGE Electric Wire & Power Distribution Category 61" [ref=f7e2355]:
+                  - generic [ref=f7e2356]:
+                    - generic [ref=f7e2357]: BATTERY, STORAGE
+                    - generic [ref=f7e2358]: Electric Wire & Power Distribution
+                    - generic [ref=f7e2359]: Category 61
+                - cell "SPE7L7-27-Q-0101" [ref=f7e2361]
+                - cell "75" [ref=f7e2362]
+                - cell "Small Business" [ref=f7e2363]:
+                  - generic "Small Business Set-Aside" [ref=f7e2364]: Small Business
+                - cell [ref=f7e2366]
+                - cell "Oct 17" [ref=f7e2367]
+                - cell "in 10d" [ref=f7e2368]:
+                  - generic "Return by Oct 27, 2026" [ref=f7e2369]: in 10d
+                - cell [ref=f7e2370]:
+                  - generic [ref=f7e2371]:
+                    - button "Save RFQ" [ref=f7e2372]
+                    - link "Open SPE7L7-27-Q-0101 on DIBBS" [ref=f7e2373]:
+                      - /url: https://www.dibbs.bsm.dla.mil/rfq/rfqrec.aspx?sn=SPE7L727Q0101
+              - row [ref=f7e2374] [cursor=pointer]:
+                - cell [ref=f7e2375]:
+                  - button "6140-01-624-9682" [ref=f7e2376]
+                - cell "BATTERY, STORAGE Electric Wire & Power Distribution Category 61" [ref=f7e2377]:
+                  - generic [ref=f7e2378]:
+                    - generic [ref=f7e2379]: BATTERY, STORAGE
+                    - generic [ref=f7e2380]: Electric Wire & Power Distribution
+                    - generic [ref=f7e2381]: Category 61
+                - cell "SPE7L7-27-Q-0102" [ref=f7e2383]
+                - cell "80" [ref=f7e2384]
+                - cell "Small Business" [ref=f7e2385]:
+                  - generic "Small Business Set-Aside" [ref=f7e2386]: Small Business
+                - cell [ref=f7e2388]
+                - cell "Oct 17" [ref=f7e2389]
+                - cell "in 10d" [ref=f7e2390]:
+                  - generic "Return by Oct 27, 2026" [ref=f7e2391]: in 10d
+                - cell [ref=f7e2392]:
+                  - generic [ref=f7e2393]:
+                    - button "Save RFQ" [ref=f7e2394]
+                    - link "Open SPE7L7-27-Q-0102 on DIBBS" [ref=f7e2395]:
+                      - /url: https://www.dibbs.bsm.dla.mil/rfq/rfqrec.aspx?sn=SPE7L727Q0102
+              - row [ref=f7e2396] [cursor=pointer]:
+                - cell [ref=f7e2397]:
+                  - button "6130-01-612-5059" [ref=f7e2398]
+                - cell "POWER SUPPLY Electric Wire & Power Distribution Category 61" [ref=f7e2399]:
+                  - generic [ref=f7e2400]:
+                    - generic [ref=f7e2401]: POWER SUPPLY
+                    - generic [ref=f7e2402]: Electric Wire & Power Distribution
+                    - generic [ref=f7e2403]: Category 61
+                - cell "SPE7L7-27-Q-0103" [ref=f7e2405]
+                - cell "37" [ref=f7e2406]
+                - cell "Unrestricted" [ref=f7e2407]:
+                  - generic "Unrestricted/Not Set Aside" [ref=f7e2408]: Unrestricted
+                - cell [ref=f7e2410]
+                - cell "Oct 17" [ref=f7e2411]
+                - cell "in 10d" [ref=f7e2412]:
+                  - generic "Return by Oct 27, 2026" [ref=f7e2413]: in 10d
+                - cell [ref=f7e2414]:
+                  - generic [ref=f7e2415]:
+                    - button "Save RFQ" [ref=f7e2416]
+                    - link "Open SPE7L7-27-Q-0103 on DIBBS" [ref=f7e2417]:
+                      - /url: https://www.dibbs.bsm.dla.mil/rfq/rfqrec.aspx?sn=SPE7L727Q0103
+              - row [ref=f7e2418] [cursor=pointer]:
+                - cell [ref=f7e2419]:
+                  - button "6140-01-586-0666" [ref=f7e2420]
+                - cell "BATTERY, STORAGE Electric Wire & Power Distribution Category 61" [ref=f7e2421]:
+                  - generic [ref=f7e2422]:
+                    - generic [ref=f7e2423]: BATTERY, STORAGE
+                    - generic [ref=f7e2424]: Electric Wire & Power Distribution
+                    - generic [ref=f7e2425]: Category 61
+                - cell "SPE7L7-27-Q-0104" [ref=f7e2427]
+                - cell "8" [ref=f7e2428]
+                - cell "Unrestricted" [ref=f7e2429]:
+                  - generic "Unrestricted/Not Set Aside" [ref=f7e2430]: Unrestricted
+                - cell [ref=f7e2432]
+                - cell "Oct 17" [ref=f7e2433]
+                - cell "in 10d" [ref=f7e2434]:
+                  - generic "Return by Oct 27, 2026" [ref=f7e2435]: in 10d
+                - cell [ref=f7e2436]:
+                  - generic [ref=f7e2437]:
+                    - button "Save RFQ" [ref=f7e2438]
+                    - link "Open SPE7L7-27-Q-0104 on DIBBS" [ref=f7e2439]:
+                      - /url: https://www.dibbs.bsm.dla.mil/rfq/rfqrec.aspx?sn=SPE7L727Q0104
+              - row [ref=f7e2440] [cursor=pointer]:
+                - cell [ref=f7e2441]:
+                  - button "6140-01-665-0454" [ref=f7e2442]
+                - cell "CELL, BATTERY Electric Wire & Power Distribution Category 61" [ref=f7e2443]:
+                  - generic [ref=f7e2444]:
+                    - generic [ref=f7e2445]: CELL, BATTERY
+                    - generic [ref=f7e2446]: Electric Wire & Power Distribution
+                    - generic [ref=f7e2447]: Category 61
+                - cell "SPE7L7-27-Q-0105" [ref=f7e2449]
+                - cell "1" [ref=f7e2450]
+                - cell "Unrestricted" [ref=f7e2451]:
+                  - generic "Unrestricted/Not Set Aside" [ref=f7e2452]: Unrestricted
+                - cell [ref=f7e2454]
+                - cell "Oct 17" [ref=f7e2455]
+                - cell "in 10d" [ref=f7e2456]:
+                  - generic "Return by Oct 27, 2026" [ref=f7e2457]: in 10d
+                - cell [ref=f7e2458]:
+                  - generic [ref=f7e2459]:
+                    - button "Save RFQ" [ref=f7e2460]
+                    - link "Open SPE7L7-27-Q-0105 on DIBBS" [ref=f7e2461]:
+                      - /url: https://www.dibbs.bsm.dla.mil/rfq/rfqrec.aspx?sn=SPE7L727Q0105
+              - row [ref=f7e2462] [cursor=pointer]:
+                - cell [ref=f7e2463]:
+                  - button "5910-01-433-4238" [ref=f7e2464]
+                - cell "CAPACITOR, FIXED, CERAMI Electrical & Electronic Equipment Components Category 59" [ref=f7e2465]:
+                  - generic [ref=f7e2466]:
+                    - generic [ref=f7e2467]: CAPACITOR, FIXED, CERAMI
+                    - generic [ref=f7e2468]: Electrical & Electronic Equipment Components
+                    - generic [ref=f7e2469]: Category 59
+                - cell "SPE7M0-27-Q-0116" [ref=f7e2471]
+                - cell "1" [ref=f7e2472]
+                - cell "Unrestricted" [ref=f7e2473]:
+                  - generic "Unrestricted/Not Set Aside" [ref=f7e2474]: Unrestricted
+                - cell [ref=f7e2476]:
+                  - img "Technical documents available" [ref=f7e2479]
+                - cell "Oct 17" [ref=f7e2482]
+                - cell "in 12d" [ref=f7e2483]:
+                  - generic "Return by Oct 29, 2026" [ref=f7e2484]: in 12d
+                - cell [ref=f7e2485]:
+                  - generic [ref=f7e2486]:
+                    - button "Save RFQ" [ref=f7e2487]
+                    - link "Open SPE7M0-27-Q-0116 on DIBBS" [ref=f7e2488]:
+                      - /url: https://www.dibbs.bsm.dla.mil/rfq/rfqrec.aspx?sn=SPE7M027Q0116
+              - row [ref=f7e2489] [cursor=pointer]:
+                - cell [ref=f7e2490]:
+                  - button "5925-01-659-8637" [ref=f7e2491]
+                - cell "CIRCUIT BREAKER Electrical & Electronic Equipment Components Category 59" [ref=f7e2492]:
+                  - generic [ref=f7e2493]:
+                    - generic [ref=f7e2494]: CIRCUIT BREAKER
+                    - generic [ref=f7e2495]: Electrical & Electronic Equipment Components
+                    - generic [ref=f7e2496]: Category 59
+                - cell "SPE7M0-27-Q-0115" [ref=f7e2498]
+                - cell "1" [ref=f7e2499]
+                - cell "Unrestricted" [ref=f7e2500]:
+                  - generic "Unrestricted/Not Set Aside" [ref=f7e2501]: Unrestricted
+                - cell [ref=f7e2503]
+                - cell "Oct 17" [ref=f7e2504]
+                - cell "in 13d" [ref=f7e2505]:
+                  - generic "Return by Oct 30, 2026" [ref=f7e2506]: in 13d
+                - cell [ref=f7e2507]:
+                  - generic [ref=f7e2508]:
+                    - button "Save RFQ" [ref=f7e2509]
+                    - link "Open SPE7M0-27-Q-0115 on DIBBS" [ref=f7e2510]:
+                      - /url: https://www.dibbs.bsm.dla.mil/rfq/rfqrec.aspx?sn=SPE7M027Q0115
+              - row [ref=f7e2511] [cursor=pointer]:
+                - cell [ref=f7e2512]:
+                  - button "5950-01-304-5865" [ref=f7e2513]
+                - cell "COIL, RADIO FREQUENCY Electrical & Electronic Equipment Components Category 59" [ref=f7e2514]:
+                  - generic [ref=f7e2515]:
+                    - generic [ref=f7e2516]: COIL, RADIO FREQUENCY
+                    - generic [ref=f7e2517]: Electrical & Electronic Equipment Components
+                    - generic [ref=f7e2518]: Category 59
+                - cell "SPE7M0-27-Q-0117" [ref=f7e2520]
+                - cell "1" [ref=f7e2521]
+                - cell "Unrestricted" [ref=f7e2522]:
+                  - generic "Unrestricted/Not Set Aside" [ref=f7e2523]: Unrestricted
+                - cell [ref=f7e2525]
+                - cell "Oct 17" [ref=f7e2526]
+                - cell "in 13d" [ref=f7e2527]:
+                  - generic "Return by Oct 30, 2026" [ref=f7e2528]: in 13d
+                - cell [ref=f7e2529]:
+                  - generic [ref=f7e2530]:
+                    - button "Save RFQ" [ref=f7e2531]
+                    - link "Open SPE7M0-27-Q-0117 on DIBBS" [ref=f7e2532]:
+                      - /url: https://www.dibbs.bsm.dla.mil/rfq/rfqrec.aspx?sn=SPE7M027Q0117
+              - row [ref=f7e2533] [cursor=pointer]:
+                - cell [ref=f7e2534]:
+                  - button "5935-01-725-0571" [ref=f7e2535]
+                - cell "SOCKET, NONPLUG-IN ELEC Electrical & Electronic Equipment Components Category 59" [ref=f7e2536]:
+                  - generic [ref=f7e2537]:
+                    - generic [ref=f7e2538]: SOCKET, NONPLUG-IN ELEC
+                    - generic [ref=f7e2539]: Electrical & Electronic Equipment Components
+                    - generic [ref=f7e2540]: Category 59
+                - cell "SPE7M5-27-Q-0089" [ref=f7e2542]
+                - cell "3" [ref=f7e2543]
+                - cell "Unrestricted" [ref=f7e2544]:
+                  - generic "Unrestricted/Not Set Aside" [ref=f7e2545]: Unrestricted
+                - cell [ref=f7e2547]:
+                  - img "Technical documents available" [ref=f7e2550]
+                - cell "Oct 17" [ref=f7e2553]
+                - cell "in 14d" [ref=f7e2554]:
+                  - generic "Return by Oct 31, 2026" [ref=f7e2555]: in 14d
+                - cell [ref=f7e2556]:
+                  - generic [ref=f7e2557]:
+                    - button "Save RFQ" [ref=f7e2558]
+                    - link "Open SPE7M5-27-Q-0089 on DIBBS" [ref=f7e2559]:
+                      - /url: https://www.dibbs.bsm.dla.mil/rfq/rfqrec.aspx?sn=SPE7M527Q0089
+              - row [ref=f7e2560] [cursor=pointer]:
+                - cell [ref=f7e2561]:
+                  - button "5935-01-516-9361" [ref=f7e2562]
+                - cell "CONNECTOR, PLUG, ELECTRI Electrical & Electronic Equipment Components Category 59" [ref=f7e2563]:
+                  - generic [ref=f7e2564]:
+                    - generic [ref=f7e2565]: CONNECTOR, PLUG, ELECTRI
+                    - generic [ref=f7e2566]: Electrical & Electronic Equipment Components
+                    - generic [ref=f7e2567]: Category 59
+                - cell "SPE7M5-27-Q-0090" [ref=f7e2569]
+                - cell "29" [ref=f7e2570]
+                - cell "Unrestricted" [ref=f7e2571]:
+                  - generic "Unrestricted/Not Set Aside" [ref=f7e2572]: Unrestricted
+                - cell [ref=f7e2574]:
+                  - img "Technical documents available" [ref=f7e2577]
+                - cell "Oct 17" [ref=f7e2580]
+                - cell "in 14d" [ref=f7e2581]:
+                  - generic "Return by Oct 31, 2026" [ref=f7e2582]: in 14d
+                - cell [ref=f7e2583]:
+                  - generic [ref=f7e2584]:
+                    - button "Save RFQ" [ref=f7e2585]
+                    - link "Open SPE7M5-27-Q-0090 on DIBBS" [ref=f7e2586]:
+                      - /url: https://www.dibbs.bsm.dla.mil/rfq/rfqrec.aspx?sn=SPE7M527Q0090
+              - row [ref=f7e2587] [cursor=pointer]:
+                - cell [ref=f7e2588]:
+                  - button "5999-01-251-5108" [ref=f7e2589]
+                - cell "CONTACT, ELECTRICAL Electrical & Electronic Equipment Components Category 59" [ref=f7e2590]:
+                  - generic [ref=f7e2591]:
+                    - generic [ref=f7e2592]: CONTACT, ELECTRICAL
+                    - generic [ref=f7e2593]: Electrical & Electronic Equipment Components
+                    - generic [ref=f7e2594]: Category 59
+                - cell "SPE7M5-27-Q-0091" [ref=f7e2596]
+                - cell "152" [ref=f7e2597]
+                - cell "Unrestricted" [ref=f7e2598]:
+                  - generic "Unrestricted/Not Set Aside" [ref=f7e2599]: Unrestricted
+                - cell [ref=f7e2601]
+                - cell "Oct 17" [ref=f7e2602]
+                - cell "in 14d" [ref=f7e2603]:
+                  - generic "Return by Oct 31, 2026" [ref=f7e2604]: in 14d
+                - cell [ref=f7e2605]:
+                  - generic [ref=f7e2606]:
+                    - button "Save RFQ" [ref=f7e2607]
+                    - link "Open SPE7M5-27-Q-0091 on DIBBS" [ref=f7e2608]:
+                      - /url: https://www.dibbs.bsm.dla.mil/rfq/rfqrec.aspx?sn=SPE7M527Q0091
+              - row [ref=f7e2609] [cursor=pointer]:
+                - cell [ref=f7e2610]:
+                  - button "5999-01-251-5108" [ref=f7e2611]
+                - cell "CONTACT, ELECTRICAL Electrical & Electronic Equipment Components Category 59" [ref=f7e2612]:
+                  - generic [ref=f7e2613]:
+                    - generic [ref=f7e2614]: CONTACT, ELECTRICAL
+                    - generic [ref=f7e2615]: Electrical & Electronic Equipment Components
+                    - generic [ref=f7e2616]: Category 59
+                - cell "SPE7M5-27-Q-0092" [ref=f7e2618]
+                - cell "152" [ref=f7e2619]
+                - cell "Unrestricted" [ref=f7e2620]:
+                  - generic "Unrestricted/Not Set Aside" [ref=f7e2621]: Unrestricted
+                - cell [ref=f7e2623]:
+                  - img "Technical documents available" [ref=f7e2626]
+                - cell "Oct 17" [ref=f7e2629]
+                - cell "in 14d" [ref=f7e2630]:
+                  - generic "Return by Oct 31, 2026" [ref=f7e2631]: in 14d
+                - cell [ref=f7e2632]:
+                  - generic [ref=f7e2633]:
+                    - button "Save RFQ" [ref=f7e2634]
+                    - link "Open SPE7M5-27-Q-0092 on DIBBS" [ref=f7e2635]:
+                      - /url: https://www.dibbs.bsm.dla.mil/rfq/rfqrec.aspx?sn=SPE7M527Q0092
+              - row [ref=f7e2636] [cursor=pointer]:
+                - cell [ref=f7e2637]:
+                  - button "5935-01-619-3568" [ref=f7e2638]
+                - cell "CONNECTOR, PLUG, ELECTRI Electrical & Electronic Equipment Components Category 59" [ref=f7e2639]:
+                  - generic [ref=f7e2640]:
+                    - generic [ref=f7e2641]: CONNECTOR, PLUG, ELECTRI
+                    - generic [ref=f7e2642]: Electrical & Electronic Equipment Components
+                    - generic [ref=f7e2643]: Category 59
+                - cell "SPE7M5-27-Q-0093" [ref=f7e2645]
+                - cell "1" [ref=f7e2646]
+                - cell "Unrestricted" [ref=f7e2647]:
+                  - generic "Unrestricted/Not Set Aside" [ref=f7e2648]: Unrestricted
+                - cell [ref=f7e2650]
+                - cell "Oct 17" [ref=f7e2651]
+                - cell "in 14d" [ref=f7e2652]:
+                  - generic "Return by Oct 31, 2026" [ref=f7e2653]: in 14d
+                - cell [ref=f7e2654]:
+                  - generic [ref=f7e2655]:
+                    - button "Save RFQ" [ref=f7e2656]
+                    - link "Open SPE7M5-27-Q-0093 on DIBBS" [ref=f7e2657]:
+                      - /url: https://www.dibbs.bsm.dla.mil/rfq/rfqrec.aspx?sn=SPE7M527Q0093
+        - navigation "Pagination" [ref=f7e2658]:
+          - paragraph [ref=f7e2659]:
+            - text: Showing
+            - generic [ref=f7e2660]: 1-16
+            - text: of 16
+  - button "Open Next.js Dev Tools" [ref=f7e95] [cursor=pointer]
+  - alert [ref=f7e99]

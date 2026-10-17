@@ -1,0 +1,27 @@
+- generic [active] [ref=f3e1]:
+  - main [ref=f3e2]:
+    - region "RFQ results" [ref=f3e3]:
+      - generic [ref=f3e4]:
+        - generic [ref=f3e5]:
+          - generic [ref=f3e6]: Sort by
+          - combobox "Sort results" [ref=f3e7]:
+            - generic [ref=f3e8]: Closing soonest
+            - img [aria-hidden]: ▼
+          - textbox [aria-hidden] [ref=f3e9]: closing
+        - generic [ref=f3e10]:
+          - generic [ref=f3e11]:
+            - generic: j
+            - generic: k
+            - text: move
+          - generic [ref=f3e12]:
+            - generic: Enter
+            - text: details
+          - generic [ref=f3e13]:
+            - generic: o
+            - text: DIBBS
+          - generic [ref=f3e14]:
+            - generic: s
+            - text: save
+      - generic "Loading RFQs" [ref=f3e16]
+  - button "Open Next.js Dev Tools" [ref=f3e86] [cursor=pointer]
+  - alert [ref=f3e90]

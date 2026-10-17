@@ -1,0 +1,33 @@
+- generic [active] [ref=f7e1]:
+  - generic [ref=f7e2]:
+    - banner [ref=f7e3]:
+      - generic [ref=f7e4]:
+        - generic [ref=f7e9]:
+          - heading "Solicitation Browser" [level=1] [ref=f7e10]
+          - paragraph [ref=f7e11]: DLA RFQ opportunities
+        - group [ref=f7e13]:
+          - group [ref=f7e14]
+          - searchbox "Search RFQs" [ref=f7e18]
+          - group [ref=f7e19]
+        - generic [ref=f7e20]:
+          - button "Re-scrape the latest RFQs from DIBBS" [ref=f7e21]
+          - button [ref=f7e22]
+    - main [ref=f7e24]:
+      - generic [ref=f7e25]:
+        - tablist [ref=f7e27]:
+          - tab "For you" [ref=f7e28]
+          - tab "All RFQs" [selected] [ref=f7e29]
+          - tab "Saved 0" [ref=f7e30]:
+            - text: Saved
+            - generic [ref=f7e31]: "0"
+        - button "Filters" [ref=f7e32]
+      - region "RFQ results" [ref=f7e33]:
+        - generic [ref=f7e35]:
+          - generic [ref=f7e36]: Sort by
+          - combobox "Sort results" [ref=f7e37]:
+            - generic [ref=f7e38]: Closing soonest
+            - img [aria-hidden]: ▼
+          - textbox [aria-hidden] [ref=f7e39]: closing
+        - generic "Loading RFQs" [ref=f7e41]
+  - button "Open Next.js Dev Tools" [ref=f7e95] [cursor=pointer]
+  - alert [ref=f7e99]
