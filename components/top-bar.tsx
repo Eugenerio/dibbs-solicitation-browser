@@ -92,7 +92,7 @@ export function TopBar({ q, onQChange, meta, interestCount, onOpenInterests, onR
           </InputGroup>
         </div>
 
-        <div className="ml-auto flex shrink-0 items-center gap-2">
+        <div className="ml-auto flex max-w-full flex-wrap items-center justify-end gap-2 lg:shrink-0 lg:flex-nowrap">
           <div className="hidden text-right text-xs leading-tight text-muted-foreground xl:block" aria-live="polite">
             {refresh.error ? (
               <span className="text-destructive">Refresh failed: {refresh.error}</span>
@@ -107,7 +107,7 @@ export function TopBar({ q, onQChange, meta, interestCount, onOpenInterests, onR
             )}
           </div>
           <Button variant="outline" onClick={() => void refresh.start()} disabled={refresh.running} title="Re-scrape the latest RFQs from DIBBS">
-            <span className="max-w-44 truncate">
+            <span className="max-w-28 truncate sm:max-w-44">
               {refresh.running ? (
                 (refresh.message ?? "Refreshing…")
               ) : (
